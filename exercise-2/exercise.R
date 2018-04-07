@@ -4,35 +4,34 @@
 # Hint: use the `paste()` function and vector recycling to add a number to the word
 # "Employee"
 
-v1 <- 1:100
-Employees <- paste("Employee", v1)
+employees <- paste("Employee", 1:100)
 
 # Create a vector of 100 random salaries for the year 2017
 # Use the `runif()` function to pick random numbers between 40000 and 50000
 
-Salaries_2017 <- runif(100, min = 40000, max = 50000)
+salaries_2017 <- runif(100, 40000, 50000)
 
 # Create a vector of 100 salaries in 2018 that have changed from 2017
 # Use `runif()` to add a random number between -5000 and 10000 to each of 2017's
 # salaries (the negative number means that a salary may have decreased!)
 
-Salaries_Change <- runif(100, min = -5000, max = 10000)
-New_Salaries_2018 <- Salaries_2017 + Salaries_Change
+salaries_2018 <- salaries_2017 + runif(100, -5000, 10000)
 
 # Create a data frame 'salaries' by combining the 3 vectors you just made
 # Remember to set `stringsAsFactors=FALSE`!
 
-Salaries <- data.frame(Salaries_2017, New_Salaries_2018, stringAsFactors=FALSE)
+salaries <- data.frame(employees, salaries_2017, salaries_2018, stringsAsFactors=FALSE)
 
 # Create a column 'change' that stores each person's change in salary between
 # 2017 and 2018
 
-Salaries$change <- New_Salaries_2018 - Salaries_2017
+salaries$change <- salaries_2018 - salaries_2017
 
 # Create a column 'got_raise' that is TRUE if the person got a raise (their
 # salary went up)
 
-Salaries$got_raise <- New_Salaries_2018 - Salaries_2017 > 0
+salaries$got_raise <- salaries$change > 0
+
 
 ### Retrieve values from your data frame to answer the following questions
 ### Note that you should get the value as specific as possible (e.g., a single
@@ -40,36 +39,40 @@ Salaries$got_raise <- New_Salaries_2018 - Salaries_2017 > 0
 
 # What was the 2018 salary of employee 57
 
-Salaries[57, "New_Salaries_2018"]
-
-57298.46
-
+salary_57 <- salaries[salaries$employees == "Employee 57", "salaries_2018"]
 
 # How many employees got a raise?
 
-Salaries$true
+nrow(salaries[salaries$got.raise == TRUE, ])
 
+# What was the dollar value of the highest raise?
 
-Sa# What was the dollar value of the highest raise?
-
+highest_raise <- max(salaries$change)
 
 # What was the "name" of the employee who received the highest raise?
+
+got_biggest_raise <- salaries[salaries$change == highest_raise, "employees"]
 
 
 # What was the largest decrease in salaries between the two years?
 
+biggest_paycut <- min(salaries$change)
 
 # What was the name of the employee who recieved largest decrease in salary?
 
+got_biggest_paycut <- salaries[salaries$change == biggest_paycut, "employees"]
 
 # What was the average salary change?
 
+avg_increase <- mean(salaries$change)
 
 # For people who did not get a raise, how much money did they lose on average?
 
+avg_loss <- mean(salaries$change[salaries$got_raise == FALSE])
 
 ## Consider: do the above averages match what you expected them to be based on 
 ## how you generated the salaries?
 
 # Write a .csv file of your salary data to your working directory
 
+write.csv(salaries, 'salaries.csv')
