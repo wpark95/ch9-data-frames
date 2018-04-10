@@ -13,7 +13,7 @@ is.data.frame(USPersonalExpenditure)
 
 # Luckily, you can pass the USPersonalExpenditure variable as an argument to the
 # `data.frame()` function to convert it a data farm. Do this, storing the
-# result in a new variable
+# result in a new variable 
 
 us_exp <- data.frame(USPersonalExpenditure)
 
@@ -34,15 +34,15 @@ us_exp$category <- rownames(us_exp)
 
 # How much money was spent on personal care in 1940?
 
-care_1940 <- us_exp['Personal Care', 'X1940']
+Care_1940 <- us_exp['Personal Care', 'X1940']
 
 # How much money was spent on Food and Tobacco in 1960?
 
-food_1960 <- us_exp['Food and Tobacco', 'X1960']
+Food_1960 <- us_exp['Food and Tobacco', 'X1960']
 
 # What was the highest expenditure category in 1960?
 
-highest_1960 <- us_exp$category[us_exp$X1960 == max(us_exp$X1960)]
+Highest_1960 <- us_exp$category[us_exp$X1960 == max(us_exp$X1960)]
 
 # Define a function `lowest_category` that takes in a year as a parameter, and
 # returns the lowest spending category of that year

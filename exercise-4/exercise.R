@@ -5,7 +5,7 @@
 # Be sure to set your working directory in RStudio, and do NOT treat strings as 
 # factors!
 
-grants <- read.csv('data/gates_money.csv', stringsAsFactors=FALSE)
+grants <- read.csv('data/gates_money.csv', stringsAsFactors = FALSE)
 
 # Use the View function to look at the loaded data
 
@@ -36,14 +36,14 @@ highest_amount <- max(grants$total_amount)
 
 lowest_amount <- min(grants$total_amount)
 
-# Which organization received the largest grant?
+# Which organization received the largest grant? **********************
 
 largest_recipient <- organization[grants$total_amount == highest_amount]
 
-# Which organization received the smallest grant?
+# Which organization received the smallest grant? ***********************
 
 smallest_recipient <- organization[grants$total_amount == lowest_amount]
 
-# How many grants were awarded in 2010?
+# How many grants were awarded in 2010? *********************
 
 length(grants$total_amount[grants$start_year == 2010])
